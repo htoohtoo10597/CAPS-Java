@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+	<div class="container inside">
+		<h1>Perform Grading</h1>
+		
+		<div>	
+	
+		<p><b>Course  :
+				<span th:text= "${course.courseName} ", class="text-danger"></span></b></p>
+	<div>
+		
+				
+		<form th:action="@{/lecturer/save-grades/{id}(id=${course.id})}" method="post">
+			
+			  <div class="form-group">
+		
+				    <label>Select Sudent:</label>
+				    <select class="form-control mb-3" name="selectedStudent"  style="width:500px" >
+				      <option th:each="student : ${listStudents}" 
+				      th:text="${student.firstName}+' '+${student.lastName}" th:value="${student.id}"></option>
+				    </select>
+				    
+				    <label>Select Gade:</label>
+				    <select class="form-control mb-3" name="selectedGrade"style="width:500px">
+				    <option th:value="A">A</option>
+				    <option th:value="B">B</option>
+				    <option th:value="C">C</option>
+				    <option th:value="D">D</option>
+				    <option th:value="F">F</option>
+				    </select>				
+				    
+			  </div>
+				<a type="button" class="btn btn-secondary" th:href="@{/lecturer/view-courses}">Cancel</a>
+				<button type="submit" class="btn btn-primary">Mark Completion</button>
+			
+		</form>
+
+	</div>
+</body>
+</html>

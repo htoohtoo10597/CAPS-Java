@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+	<div class="container inside">
+			<div class="card-columns">
+			
+			<div class="card shadow">
+			  <img th:src="@{/images/prof-discussion.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Total Students</h5>
+			      <p class="card-text" th:utext="${studCount}"></p>
+			      <a class="card-text" th:href="@{/admin/manage-students}">Manage Students</a>
+			    </div>
+			</div>
+			
+			<div class="card shadow">
+			    <img th:src="@{/images/group-outside.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Total Lecturers</h5>
+			      <p class="card-text" th:utext="${lecCount}"></p>
+			      <a class="card-text" th:href="@{/admin/manage-lecturers}">Manage Lecturers</a>
+			    </div>
+			</div>
+			  
+			  <div class="card shadow">
+			    <img th:src="@{/images/course-class.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Total Courses</h5>
+			      <p class="card-text" th:utext="${courseCount}"></p>
+			      <a class="card-text" th:href="@{/admin/manage-course}">Manage Courses</a>
+			    </div>
+			  </div>
+
+		</div>				
+	</div>
+</body>
+</html>

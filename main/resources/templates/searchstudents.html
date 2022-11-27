@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+
+	
+	<div class="container inside">
+	
+			<div th:fragment="lecturer-banner" id="lecturer-banner">
+		
+			<h1>Find Student</h1>
+		</div>
+		<div th:insert="fragments/layout.html:: admin-banner">
+		</div>
+		<div style="margin-bottom: 3%;">
+			<table width="100%">
+				<tr>
+						<td>
+						<form action="#" th:action="@{/lecturer/search-results/}"method="POST">
+							<table>
+								<tr>
+									<td style="width: 87%"><input type ="text" name="name" placeholder = "Search student by first or last name" class="form-control"></td>
+									<td style="padding-left: 3%"><button type="submit" class="btn btn-info">Search</button></td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+				
+
+</div>
+</body>
+</html>

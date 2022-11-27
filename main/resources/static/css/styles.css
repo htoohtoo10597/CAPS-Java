@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+body {
+	margin: 0;
+	overflow-y: auto;
+	font-family: "Nanum Gothic";
+	background-image: url("../images/background.png");
+	background-size:cover;
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+}
+
+:root {
+  --main-color: #333333;
+  --accent-color: #f2f2f2;
+}
+
+.nav {
+	overflow: hidden;
+  	background-color: var(--main-color);
+  	position: fixed; /* Set the navbar to fixed position */
+  	top: 0; /* Position the navbar at the top of the page */
+  	z-index: 1;
+  	width: 100%; /* Full width */
+  	vertical-align:middle;
+  	min-height: 80px;
+}
+
+.nav a {
+	  float: left;
+	  display: block;
+	  color: var(--accent-color);
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+}
+
+.sidenav {
+	  min-width:200px; /* Set the width of the sidebar */
+	  max-width: 200px;
+	  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	  top: 0; /* Stay at the top */
+	  left: 0;
+	  background-color: #DDD;
+	  overflow: hidden; /* Disable horizontal scroll */
+	  /*padding-top: 5%;*/
+	  margin:0;
+	  height: 100%;
+}
+
+
+.sidenav a {
+	text-align:right;
+	  padding: 10px;
+	  text-decoration: none;
+	  font-size: 0.8em;
+	  color: #818181;
+	  display: block;
+}
+
+.sidenav a:hover{
+	background-color: #818181;
+	color: var(--accent-color);
+}
+
+h1 {
+	padding-bottom: 2%;	
+}
+
+.inside {
+	width:100%;
+	height:auto;
+
+	margin-left: 30vh;
+	margin-top: 10%;
+	margin-right:8vh;
+	overflow: auto;
+}
+
+.table-form {
+	table-layout:fixed;
+	word-wrap:break-word;
+}
+
+.login-form {
+	padding: 10px;
+}
+
+.login-form button{
+	margin-top: 10px;
+	width: 100%;
+}
+
+.hidden-block{
+	min-height: 80px;
+}
+
+/*for intro animation*/
+.intro {
+  background: var(--main-color);
+  /*
+  background-image:url("../images/Subtract.png");
+  background-size:cover;
+  */
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider {
+  background: rgb(97, 105, 109);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+}
+
+.intro-text {
+  color: rgb(233, 233, 233);
+  font-size: 3rem;
+}
+
+.intro-text .logo {
+	display: inline-block;
+	margin:-4px;
+}
+
+.hide {
+  background: var(--main-color);
+  overflow: hidden;
+}
+
+.hide span {
+  transform: translateY(100%);
+  display: inline-block;
+
+}
+
+.navbar-name {
+	color: #eeeeee;
+	padding-right: 5%;
+	text-align:right;
+	-ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.lists {
+	table-layout: auto;
+	background-color: white;
+}
+
+/*
+.lists thead {
+	white-space:nowrap;
+}
+*/
+.table-action {
+	white-space: nowrap;
+}
+
+.current-page {
+	background-color: var(--main-color);
+	color: white;
+}

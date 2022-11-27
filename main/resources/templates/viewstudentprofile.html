@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Course Application Processing System</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+
+	<div class="container inside">
+
+		<h1>Student Perfomance</h1>
+
+	<div>	
+	
+		<p><b>Student  :
+				<span th:text= "${studentCourses[0].student.firstName} + ' ' + ${studentCourses[0].student.lastName} ", class="text-danger"></span></b></p>		
+		<p><b>Current GPA :
+			<span th:text= "${gpa}", class="text-danger"></span></b></p>		
+					
+	<div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Course Taken</th>
+					<th>Status</th>
+					<th>Grade</th>
+					<!-- <th>Start Date</th>
+					<th>End Date</th> -->
+									
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="studCourse : ${studentCourses}">
+					<td th:text="${studCourse.course.courseName}"></td>
+					<td th:text="${studCourse.courseStatus}"></td>
+					<td th:text="${studCourse.grade}"></td>
+					<!-- <td th:text="${course.startDate}"></td>
+					<td th:text="${course.endDate}"></td> -->	
+				</tr>
+			</tbody>
+		</table>
+		</br>
+	<a type="button" class="btn btn-primary" th:href="@{/lecturer/search-students}"> Find Another Student</a>			
+	</div>
+</body>
+</html>
+
+<script>
+function GoBackWithRefresh(event) {
+    if ('referrer' in document) {
+        window.location = document.referrer;
+    } else {
+        window.history.back();
+    }
+}
+</script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+
+	
+	<div class="container inside">
+	
+		<h1>Manage Lecturers</h1>
+
+		<div style="margin-bottom: 3%;">
+			<table width="100%">
+				<tr>
+					<td>
+						<a th:href = "@{/admin/add-new-lecturer}" class="btn btn-info" style="margin-right: 3%">Add a New Lecturer</a>
+					</td>
+					<td>
+						<form action="#" th:action="@{/admin/search-lecturers}" method="POST">
+							<table>
+								<tr>
+									<td style="width: 87%"><input type ="text" name="name" placeholder = "Search lecturer first or last name" class="form-control"></td>
+									<td style="padding-left: 3%"><button type="submit" class="btn btn-info">Search</button></td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+<!--		<div th:if = "${totalPages > 1}" style="margin-bottom: 3%; text-align: right;">
+			<div class= "row col-sm-10">
+				<div class="col-sm-2">
+					Total Rows: [[${totalItems}]]
+				</div>
+				<div class="col-sm-3">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if = "${currentPage != i}" th:href="@{'/admin/manage-lecturers/page/'+ ${i}}">[[${i}]]</a>
+						<span th:unless = "${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/manage-lecturers/page/' + ${currentPage + 1}}">Next</a>
+					<span th:unless = "${currentPage < totalPages}">Next</span>
+				</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/manage-lecturers/page/' + ${totalPages}}">Last</a>
+					<span th:unless = "${currentPage < totalPages}">Last</span>
+				</div>
+			</div>
+		</div>-->
+		
+		<table class="table table-striped table-form lists">
+		<thead>
+			<tr>
+				<th>Lecturer First Name</th>
+				<th>Lecturer Last Name</th>
+				<th>Email</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		<!-- 
+			to iterate through a list, use th:each = ""
+			inside the quotes: 
+				var_name : ${object_passed_from_controller} <- make sure this is a collection 
+		-->
+			<tr th:each="lec : ${listLecturers}">
+				<!--
+					use ${var_name.attribute} to access the attributes of the object
+				-->
+				<td th:text="${lec.firstName}"></td>
+				<td th:text="${lec.lastName}"></td>
+				<td th:text="${lec.email}"></td>
+				<td class="table-action">
+					<a th:href="@{/admin/update-lecturer/{id}(id=${lec.id})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/admin/delete-lecturer/{id}(id=${lec.id})}" class="btn btn-danger">Delete</a>
+					<a th:href="@{/admin/view-lecturer-courses/{id}(id=${lec.id})}" class="btn btn-outline-secondary">[+] View Courses</a>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		
+		<!--
+		<div th:if = "${totalPages > 1}" style="margin-bottom: 20%;">
+			<div class= "row col-sm-10">
+				<div class="col-sm-2">
+					Total Rows: [[${totalItems}]]
+				</div>
+				<div class="col-sm-3">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if = "${currentPage != i}" th:href="@{'/admin/manage-lecturers/page/'+ ${i}}">[[${i}]]</a>
+						<span th:unless = "${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/manage-lecturers/page/' + ${currentPage + 1}}">Next</a>
+					<span th:unless = "${currentPage < totalPages}">Next</span>
+				</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/manage-lecturers/page/' + ${totalPages}}">Last</a>
+					<span th:unless = "${currentPage < totalPages}">Last</span>
+				</div>
+			</div>
+		</div>
+		-->
+
+	</div>
+</body>
+</html>

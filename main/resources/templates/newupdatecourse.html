@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Course Application Processing System</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+
+	<div class="container inside">
+		<h1 th:if="${course.id} == null">Add a New Course</h1>
+		<h1 th:if="${course.id} != null">Update a Course</h1>
+		
+		<form action="#" th:action="@{/admin/save-course}" th:object = "${course}" method="POST">
+			<input type ="hidden" th:field = "*{id}">
+			<fieldset class="mb-4">
+				<input type ="text" th:field = "*{courseName}" placeholder = "Course Name" class="form-control col-4">
+				<p th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}"></p>
+			</fieldset>
+			<fieldset class="mb-4">
+				<textarea class="form-control col-4" th:field = "*{courseDescription}" placeholder = "Course Description" rows="3"></textarea>
+				<p th:if="${#fields.hasErrors('courseDescription')}" th:errors="*{courseDescription}"></p>
+			</fieldset>
+			<fieldset class="mb-4">
+				Credit units:<input type ="number" th:field = "*{creditUnit}" class="form-control col-4" min="2" max="16" value="1">
+				<p th:if="${#fields.hasErrors('creditUnit')}" th:errors="*{creditUnit}"></p>
+			</fieldset>
+			<fieldset class="mb-4">
+				Course size:<input type ="number" th:field = "*{maxSize}" class="form-control col-4" min="1" max="100" value="1">
+			</fieldset>
+			<fieldset class="mb-4">
+				Start date:<input type ="date" th:field = "*{startDate}" th:text="${#dates.format(course.startDate, 'dd-MM-yyyy')}" placeholder = "dd-MM-yyyy" class="form-control col-4">
+				<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p>
+			</fieldset>
+			<fieldset class="mb-4">
+				End date:<input type ="date" th:field = "*{endDate}" th:text="${#dates.format(course.endDate, 'dd-MM-yyyy')}" placeholder = "dd-MM-yyyy" class="form-control col-4">
+				<p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p>
+			</fieldset>
+			<button type="submit" class="btn btn-info col-2">Save</button>
+		</form>	
+		
+	</div>
+	
+</body>
+</html>

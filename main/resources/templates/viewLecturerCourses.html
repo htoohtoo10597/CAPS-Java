@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+	<div class="container inside">
+		<button class = "btn btn-link" style="margin: 2vh;" onclick="window.history.back()">< Go Back</button>
+		<h1><span th:utext="${lecturer.firstName}"/> <span th:utext="${lecturer.lastName}"/></h1>
+		<h5>Username: <span th:utext="${lecturer.username}"/></h5>
+		<span>Courses Taught:</span><span th:utext="${lecturer.courses.size}"/>
+		
+		<div style="margin: 3% 0;">
+			<table width="100%">
+				<tr>
+					<td>
+						<a th:href = "@{/admin/add-course-to-lecturer/{id}(id=${lecturer.id})}" class="btn btn-info" style="margin-right: 3%">Assign to a New Course</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+		<table class="table table-striped table-form lists">
+		<thead>
+			<tr>
+				<th>Course Name</th>
+				<th>Course Description</th>
+				<th>Capacity</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		<!-- 
+			to iterate through a list, use th:each = ""
+			inside the quotes: 
+				var_name : ${object_passed_from_controller} <- make sure this is a collection 
+		-->
+			<tr th:if="${#lists.isEmpty(listCourse)}">
+				<td colspan="4" style="text-align: center; font-weight: bolder;">No courses to display</td>
+			</tr>
+			<tr th:each="course : ${listCourse}">
+				<!--
+					use ${var_name.attribute} to access the attributes of the object
+				-->
+				<td th:text="${course.courseName}"></td>
+				<td th:text="${course.courseDescription}"></td>
+				<td th:text="${course.maxSize}"></td>
+				<td class="table-action">
+
+					<a th:href="@{/admin/delete-course-from-lecturer/{lec-id}/{course-id}(lec-id=${lecturer.id},course-id=${course.id})}" class="btn btn-danger">Unassign from Course</a>
+				<!--
+					<a th:href="@{/admin/delete-lecturer/{id}(id=${lec.id})}" class="btn btn-danger">Delete</a>
+					<a th:href="@{/admin/view-lecturer-courses/{id}(id=${lec.id})}" class="btn btn-outline-secondary">[+] View Courses</a>
+				-->
+				</td>
+			</tr>
+		</tbody>
+	</div>
+</body>
+</html>

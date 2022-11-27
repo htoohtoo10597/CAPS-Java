@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+	<div class="container inside">
+	<!-- put html code inside this area -->
+		<h1>Welcome to 
+				<span class="text logo" style="color:#E3073C; font-weight: bolder; margin-right: -10px;">E</span>
+				<span class="text logo" style="color:#FFD200; font-weight: bolder; margin-right: -10px;">V</span>
+				<span class="text logo" style="color:#06E07F; font-weight: bolder; margin-right: -10px;">E</span>
+				<span class="text logo" style="color:#1F84EF; font-weight: bolder; margin-right: -10px;">R</span>
+			bright.
+		</h1>
+		<p>In EVERbright, we believe in creating the best environment for our students.</p>
+			<div class="card-columns">
+			  <div class="card shadow">
+			    <img th:src="@{/images/group-outside.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Resumption of Outdoor Classes Approved</h5>
+			      <p class="card-text">After the announcement made by the Ministry of Education, EVERbright will resume its outdoor classes on July 4, 2022. card has supporting text below as a natural lead-in to additional content.</p>
+			    </div>
+			  </div>
+			  <div class="card shadow">
+			    <img th:src="@{/images/auditorium.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Upcoming Events This June 2022</h5>
+			      <p> </p>
+			      <h6 class="card-subtitle mb-2 text-muted"><b><i>15 June: Innovation and Collaboration</b></i> </h6>
+			      <p class="card-text"><b>Key speechers:</b> Roy Zur, CEO of ThriveDX SaaS; Ambassador Sagi Karni, Ambassador of Israel to Singapore. </p>
+			      <h6 class="card-subtitle mb-2 text-muted"><b><i>21 June: Russia-Ukraine Conflict: In Search of Silver Linings in the Energy Transition</b></i> </h6>
+			      <p class="card-text"><b>Key speecher:</b> Mr. Philippe Rose, Energy Analyst and Shell Executive  </p>
+			      <a href="#" class="btn btn-primary">RSVP NOW</a>
+			    </div>
+			  </div>
+			  <div class="card shadow">
+			    <img th:src="@{/images/prof-discussion.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Meeting Room Booking</h5>
+			      <p class="card-text">Five extra meeting rooms located at Level 1 are now available to SA students! Please book the room in advance online while enjoy more area for group discussion and assignment. </p>
+			      <p class="card-text"><small class="text-muted">Last updated 1 hr ago</small></p>
+			    </div>
+			  </div>
+			  <div class="card bg-primary text-white text-center p-3 shadow">
+			    <blockquote class="blockquote mb-0">
+			      <p>Quote of The Day</p>
+			      <p><i>“Life is what happens when you’re busy making other plans.”</i></p>
+			      <footer class="blockquote-footer text-white">
+			        <small>
+			          John Lennon <cite title="Source Title"> </cite>
+			        </small>
+			      </footer>
+			    </blockquote>
+			  </div>
+			  <div class="card text-center shadow">
+			    <img th:src="@{/images/shuttle-bus.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Shuttle Bus Operation Hour During Summer Break</h5>
+			      <p class="card-text">From 1 June to 1 September, services on the shuttle bus will start at 07:35am on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and stop at 08:35pm.</p>
+			    </div>
+			  </div>
+			  <div class="card shadow">
+			    <img th:src="@{/images/prof-lecture.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Tutoring Session Available Now</h5>
+			      <p class="card-text">ISS will provide several tutoring sessions to students who struggle with Java. Check the schedule below and feel free to register by emailing administrator.  </p>
+			      <p class="card-text"><b>1. Topic:SA54 JQPL Tutoring Session</b>
+			      <h6 class="card-subtitle mb-2 text-muted"><b><i>Time: June 4, 2022 09:00AM Singapore</b></i> </h6>
+			      <p class="card-text"><b>2. Topic: Modular Programming Clinic Session</b>
+			      <h6 class="card-subtitle mb-2 text-muted"><b><i>Time: June 11, 2022 09:00AM Singapore</b></i> </h6>
+			      <p class="card-text"><b>3. Topic: Machine Learning in Python Tutoring Session</b>
+			      <h6 class="card-subtitle mb-2 text-muted"><b><i>Time: June 18, 2022 09:00AM Singapore</b></i> </h6>
+			    </div>
+			  </div>
+			  <div class="card shadow">
+			  <img th:src="@{/images/sunny-weather.jpg}" class="card-img-top">
+			    <div class="card-body">
+			      <h5 class="card-title">Weather: 31°C</h5>
+			      <p class="card-text">Sunny and partly cloudy conditions will continue till 4pm. Thunderstorms expected around 9pm. Air quality index is 52, which is similar to yesterday at about this time.</p>
+			      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+			    </div>
+			  </div>
+		</div>
+	</div>
+	
+	<div class="intro">
+		<table width="60%">
+			<tr>
+				<td>
+					<img th:src="@{/images/splash-logo.png}">
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					<div class="intro-text">
+				        <h1 class="hide">
+				          <span class="text">Welcome to the</span>
+				        </h1>
+				        <h1 class="hide" style="font-weight:bolder">
+				          	<span class="text logo" style="color:#E3073C">E</span>
+				          	<span class="text logo" style="color:#FFD200">V</span>
+				          	<span class="text logo" style="color:#06E07F">E</span>
+				          	<span class="text logo" style="color:#1F84EF">R</span>
+				          	<spanclass="text">bright School</span>
+				        </h1>
+				        <h1 class="hide">
+				          <span class="text">Course Administration System.</span>
+				        </h1>
+			      	</div>
+				</td>
+			</tr>
+		</table>
+      
+    </div>
+    
+    <div class="slider"></div>
+    
+    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+    ></script>
+	
+	<script type="text/javascript" th:src="@{/js/caps.js}"></script>
+	<!--
+	<div th:replace="fragments/layout.html:: footer"></div>
+	-->
+</body>
+</html>

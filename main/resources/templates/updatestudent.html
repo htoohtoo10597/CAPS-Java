@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+	<div class="container inside">
+		<h1>Save Student Details</h1>
+		
+		<form action="#" th:action="@{/admin/save-student}" th:object = "${student}" method="POST">
+			<input type="hidden" th:field = "*{id}">
+			<input type="hidden" th:field = "*{password}">
+			<input type="hidden" th:field = "*{username}">
+			
+			<input type ="text" th:field = "*{firstName}" placeholder = "Student's' First Name"
+			class="form-control mb-4 col-4">
+			<input type ="text" th:field = "*{lastName}" placeholder = "Student's Last Name"
+			class="form-control mb-4 col-4">
+			<input type ="text" th:field = "*{email}" placeholder = "Student Email"
+			class="form-control mb-4 col-4">-
+			
+			<!-- 
+				the submit button calls the method referred to by the form when clicked.
+				all the values in the text fields will be saved in the object after 
+			-->
+			<button type="submit" class="btn btn-info col-2">Save Student</button>
+		</form>
+	</div>
+</body>
+</html>
+
+

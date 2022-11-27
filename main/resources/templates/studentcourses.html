@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Course Application Processing System</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+
+	<div class="container inside">
+
+		<h1>My Courses</h1>
+		<p th:if="${!#lists.isEmpty(studentCourses)}" th:text="'Current GPA : '+${#numbers.formatDecimal(gpa,1,2)}"></p>
+		<p th:if="${#lists.isEmpty(studentCourses)}">Current GPA : Not available</p>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Course Name</th>
+						<th>Credit units</th>
+						<th>Grade</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="studCourse : ${studentCourses}">
+						<td th:text="${studCourse.course.courseName}"></td>
+						<td th:text="${studCourse.course.creditUnit}"></td>
+						<td th:text="${studCourse.grade}"></td>
+						<td th:text="${#dates.format(studCourse.course.startDate, 'dd-MM-yyyy')}"></td>
+						<td th:text="${#dates.format(studCourse.course.endDate, 'dd-MM-yyyy')}"></td>
+						<td th:text="${studCourse.courseStatus}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Course Application Processing System</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+
+	<div class="container inside">
+		<div th:insert="fragments/layout.html:: admin-banner"></div>
+		<h1>Available Courses</h1>
+
+		<form action="#" th:action="@{/student/searchCourseList}"
+			method="post">
+			<table>
+				<tr>
+					<td style="width: 85%"><input type="text" name="search"
+						placeholder="Search course name" class="form-control"></td>
+					<td style="padding-left: 3%"><button type="submit"
+							class="btn btn-info">Search</button></td>
+				</tr>
+			</table>
+		</form>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Course Name</th>
+					<th>Course Description</th>
+					<th>Credit Units</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="course : ${listCourses}">
+					<td th:text="${course.courseName}"></td>
+					<td th:text="${course.courseDescription}"></td>
+					<td th:text="${course.creditUnit}"></td>
+					<td th:text="${#dates.format(course.startDate, 'dd-MM-yyyy')}"></td>
+					<td th:text="${#dates.format(course.endDate, 'dd-MM-yyyy')}"></td>
+					<!-- Thymeleaf will check if the course that the student is trying to register is already registered previously -->
+					<td th:if="${!#lists.contains(studRegisteredCourses, course)} and ${#lists.size(course.studentCourses)} < ${course.maxSize}"><a class="btn btn-primary btn-block mb-3" th:href="@{/student/registerCourse/}+${student.id}+@{/}+${course.id}">Register</a></td>
+					<!-- If the course is already registered, Thymeleaf will a non-clickable button saying "Enrolled" -->
+					<td th:if="${#lists.contains(studRegisteredCourses, course)}"><a class="btn btn-primary btn-block mb-3 disabled">Enrolled</a></td>
+					<!-- If the course is not yet registered but the capacity is fulled, Thymeleaf will show a non-clickable button saying "Full" -->
+					<td th:if="${!#lists.contains(studRegisteredCourses, course)} and ${#lists.size(course.studentCourses)} == ${course.maxSize}"><a class="btn btn-primary btn-block mb-3 disabled">Full</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>

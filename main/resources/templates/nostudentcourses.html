@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Course Application Processing System</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+
+	<div class="container inside">
+
+		<h1>Student Records</h1>
+
+	<div>	
+		<p><b>Student  :
+				<span th:text= "${student.firstName} + ' ' + ${student.lastName} ", class="text-danger"></span></b></p>		
+		<p ><b>Current GPA : <span class="text-danger">NA </span></b></p>	
+					
+	<div>		
+	
+		</br>
+		</br>
+		<h3 class="text-danger"><b> This Student has not taken any courses yet </b></h3>	
+		</br>
+			<a type="button" class="btn btn-primary" th:href="@{/lecturer/search-students}"> Find Another Student</a>	
+		</div>
+</body>
+</html>
+
+<script>
+function GoBackWithRefresh(event) {
+    if ('referrer' in document) {
+        window.location = document.referrer;
+    } else {
+        window.history.back();
+    }
+}
+</script>

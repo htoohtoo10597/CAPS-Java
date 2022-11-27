@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Course Application Processing System</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<div th:insert="fragments/layout.html:: header"></div>
+<div th:insert="fragments/layout.html:: sidebar"></div>
+
+<div class="container inside">
+    <div th:insert="fragments/layout.html:: admin-banner"></div>
+    <div style="margin-bottom: 3%;">
+        <button class="btn btn-link" onclick="window.history.back()">< Go Back</button>
+        <h1 th:text="'Manage Enrollment For '+${course.courseName}"></h1>
+        <span th:utext="${course.courseDescription}"></span>
+
+        <div>
+            <button th:if="${#lists.size(course.studentCourses)} < ${course.maxSize}" type="button"
+                    class="btn btn-primary btn-block mb-3 col-2" data-toggle="modal"
+                    data-target="#registerModalCenter">Add Student
+            </button>
+            <button th:if="${#lists.size(course.studentCourses)} == ${course.maxSize} or ${#lists.size(course.studentCourses)} > ${course.maxSize}"
+                    type="button" class="btn btn-primary btn-block mb-3 col-2 disabled" disabled>Full
+            </button>
+            <!-- Modal -->
+
+            <div class="modal fade" id="registerModalCenter" tabindex="-1" role="dialog"
+                 aria-labelledby="registerModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="registerModalCenterTitle">Register for...</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/admin/enroll-student}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Select Student:</label>
+                                    <select class="form-control mb-3" name="selectedStudentId">
+                                        <option th:each="student : ${listStudent}"
+                                                th:if="${!#lists.contains(listExistStudent, student)}"
+                                                th:text="${student.firstName}+' '+${student.lastName}"
+                                                th:value="${student.id}"></option>
+                                    </select>
+                                    <label>Course:</label>
+                                    <select class="form-control" name="courseId">
+                                        <option th:text="${course.courseName}" th:value="${course.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block mb-3 col-2" data-toggle="modal"
+                    data-target="#statusModalCenter">Update Status for All
+            </button>
+
+            <!-- Modal -->
+
+            <div class="modal fade" id="statusModalCenter" tabindex="-1" role="dialog"
+                 aria-labelledby="statusModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="statusModalCenterTitle">Update Course Status for all</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/admin/update-status}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Select Student:</label>
+                                    <select class="form-control mb-3" name="courseStatus">
+                                        <option value="ENROLLED">ENROLLED</option>
+                                        <option value="COMPLETED">COMPLETED</option>
+                                        <option value="FAILED">FAILED</option>
+                                    </select>
+                                    <label>Course:</label>
+                                    <select class="form-control" name="courseId">
+                                        <option th:text="${course.courseName}" th:value="${course.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table table-striped table-form lists">
+        <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="student : ${listStudCourse}">
+            <td th:text="${student.student.firstName}"></td>
+            <td th:text="${student.student.lastName}"></td>
+            <td th:text="${student.student.email}"></td>
+            <td th:text="${student.courseStatus}"></td>
+            <td class="table-action">
+                <a th:href="@{/admin/status-enrolled/}+${course.id}+@{/}+${student.id}" class="btn btn-primary">Status Enrolled</a>
+                <a th:href="@{/admin/status-completed/}+${course.id}+@{/}+${student.id}" class="btn btn-primary">Status Completed</a>
+                <a th:href="@{/admin/status-failed/}+${course.id}+@{/}+${student.id}" class="btn btn-primary">Status Failed</a>
+                <a th:href="@{/admin/deleteEnrollment/}+${course.id}+@{/}+${student.id}" class="btn btn-danger">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-link" onclick="window.history.back()">< Go Back</button>
+</div>
+
+</body>
+</html>

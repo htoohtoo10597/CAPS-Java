@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" href="../../static/images/favicon.ico">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS -->
+	
+	<!-- other CSS file -->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+	<div th:fragment="header" id="header">
+		<div class = "nav " style="display: flex; justify-content: space-between;">
+			<table width="100%">
+				<tr>
+					<td>
+						<a href="#home"><img th:src="@{/images/logo2.svg}"></a>
+					</td>
+					<td class = "navbar-name">
+						<span style= "font-weight:lighter;">Welcome, </span>
+    					<span th:if="${session.loggeduser.loggeduser.username == ''}" style= "font-weight: bolder;" th:utext="Guest"/>
+						<span th:unless="${session.loggeduser.loggeduser.username == ''}" style= "font-weight: bolder;" th:utext="${session.loggeduser.loggeduser.name}"/>
+						<span style= "font-weight:lighter; margin-left: -3px;">!</span>
+					</td>
+				</tr>
+			</table>
+
+			
+		</div>
+	</div>
+	
+	<div th:fragment="sidebar" id="sidebar">
+		<div class="sidenav shadow-sm" th:switch="${session.loggeduser.loggeduser.role}">
+				<div class="hidden-block">
+				</div>
+				
+				<div th:case="${T(sg.edu.iss.caps.model.Role).STUDENT}"><!--th:if="${user is student}"-->
+					<div style="padding-top: 10%;">
+						<a  th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).STUDENT_MY_COURSES}" th:href="@{/student/myCourses}">My Courses</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).STUDENT_MY_COURSES}" th:href="@{/student/myCourses}" class="current-page">My Courses</a>
+						
+						<a th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).STUDENT_ENROLL}" th:href="@{/student/courseList}">Enroll a Class</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).STUDENT_ENROLL}" th:href="@{/student/courseList}" class="current-page">Enroll a Class</a>
+						
+						
+						
+						<a th:href="@{/log/logout}">Logout</a>
+
+					</div>
+				</div>
+				
+				<div th:case="${T(sg.edu.iss.caps.model.Role).LECTURER}"><!--th:if="${user is lecturer}"-->
+					<div style="padding-top: 10%;">
+						<a  th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).LECTURER_VIEW_COURSES}" th:href="@{/lecturer/view-courses}">View My Courses</a>
+						<a  th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).LECTURER_VIEW_COURSES}" th:href="@{/lecturer/view-courses}" class="current-page">View My Courses</a>
+						<!--<a href="#">Perform Grading</a>-->
+						
+						<a th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).LECTURER_STUDENT_PERF}" th:href="@{/lecturer/search-students}">Student Performance</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).LECTURER_STUDENT_PERF}" th:href="@{/lecturer/search-students}" class="current-page">Student Performance</a>
+						
+						<!--<a href="#">Perform Grading</a>-->
+						
+						<a th:href="@{/log/logout}">Logout</a>
+					</div>
+				</div>
+				
+				<div th:case="${T(sg.edu.iss.caps.model.Role).ADMIN}"><!--th:if="${user is admin}"-->
+					<div style="padding-top: 10%;">
+						<a th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_HOME}" th:href="@{/admin/home}">Admin Home</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_HOME}" th:href="@{/admin/home}" class="current-page">Admin Home</a>
+						
+						<a th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_MANAGE_STUDENTS}" th:href="@{/admin/manage-students}">Manage Students</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_MANAGE_STUDENTS}" th:href="@{/admin/manage-students}" class="current-page">Manage Students</a>
+						
+						<a th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_MANAGE_LECTURERS}" th:href="@{/admin/manage-lecturers}">Manage Lecturers</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_MANAGE_LECTURERS}" th:href="@{/admin/manage-lecturers}" class="current-page">Manage Lecturers</a>
+						
+						<a th:unless="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_MANAGE_COURSES}" th:href="@{/admin/manage-course}">Manage Courses</a>
+						<a th:if="${currentMod == T(sg.edu.iss.caps.model.AppPage).ADMIN_MANAGE_COURSES}" th:href="@{/admin/manage-course}" class="current-page">Manage Courses</a>
+						
+						
+						<a th:href="@{/log/logout}">Logout</a>
+					</div>
+				</div>
+				
+				<div th:case="${T(sg.edu.iss.caps.model.Role).TO_LOGIN}"><!--th:if="${user has not logged in}"-->
+					<div class="login-form" style="text-align: center">
+						<span style="color: #888888;">Login</span>
+						<form style="margin: 7% 0;" th:object="${user}" th:action="@{/log/login}" method="get">
+							<input type= "text" th:field="*{username}" class = "form-control form-control-sm" th:placeholder = "username">
+							<input type = "password" th:field="*{password}" class = "form-control form-control-sm" th:placeholder = "password">
+							<button type = "submit" class = "btn btn-primary">Login</button>
+						</form>
+					</div>
+				</div>
+				
+				<div th:if="${LoginError != null}" class="alert alert-danger" style=" margin: 10px;">
+					<span style="font-size:0.9rem; word-wrap:normal;" th:utext="${LoginError.message[0]}"></span>
+				</div>
+
+		</div>
+	</div>
+	
+	<div th:fragment="admin-banner" id="admin-banner">
+		
+	</div>
+		
+</body>
+</html>

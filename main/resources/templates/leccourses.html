@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+
+	
+	<div class="container inside">
+		<div th:fragment="lecturer-banner" id="lecturer-banner">
+		
+			<h1>My Courses</h1>
+		</div>
+		<div style="margin-bottom: 3%;">
+			<table width="100%">
+				<tr>					
+					<td>
+						<form action="#" th:action="@{/lecturer/search-courses}" method="POST">
+							<table>
+								<tr>
+									<td style="width: 87%"><input type ="text" name="name" placeholder = "Search my courses" class="form-control"></td>
+									<td style="padding-left: 3%"><button type="submit" class="btn btn-info">Search</button></td>																		
+								</tr>								
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+			<div>			
+			<p><b>Total courses :
+			<span th:text= "${listCourses.size()}", class="text-danger"></span></b></p>				
+			</div>
+	
+	<table class="table table-striped table-form lists">
+		<thead>
+			<tr>
+				<th>Course</th>
+				<th>Description</th>
+				<th>Capacity</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Actions</th>
+				</tr>
+		</thead>
+		
+				<tbody>
+		<!-- 
+			to iterate through a list, use th:each = ""
+			inside the quotes: 
+				var_name : ${object_passed_from_controller} <- make sure this is a collection 
+		-->
+			<tr th:each="cor : ${listCourses}">
+				<!--
+					use ${var_name.attribute} to access the attributes of the object
+				-->
+				<td><p class="text-primary"><b> <span th:text="${cor.courseName}"></b></p></td>
+				<td th:text="${cor.courseDescription}"></td>
+				<td th:text="${cor.maxSize}"></td>
+				<td th:text="${#dates.format(cor.startDate, 'dd-MM-yyyy')}"></td>
+				<td th:text="${#dates.format(cor.endDate, 'dd-MM-yyyy')}"></td>
+				<td class="table-action">
+					<a th:href="@{/lecturer/view-course-student-list/{id}(id=${cor.id})}" class="btn btn-primary">View Entrollments</a>	
+					<a th:href="@{/lecturer/assign-grade/{id}(id=${cor.id})}" class="btn btn-danger">Assign Grades</a>									
+				</td>
+			</tr>
+		</tbody>
+		
+		</table>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>EVERbright School Course Admission System</title>
+		
+	<link rel="icon" th:href="@{/images/favicon.ico}">
+
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	
+	
+</head>
+
+<body>
+	<div th:insert="fragments/layout.html:: header"></div>
+	<div th:insert="fragments/layout.html:: sidebar"></div>
+	
+	<div class="container inside">
+		<h1>Save Lecturer Details</h1>
+		
+		<form action="#" th:action="@{/admin/save-lecturer}" th:object = "${lecturer}" method="POST">
+			<fieldset class="mb-4">
+				<label>Lecturer First Name</label>
+				<input type ="text" th:field = "*{firstName}" placeholder = "Lecturer First Name" class="form-control col-4" required>
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Input a first name.</p>
+			</fieldset>
+			
+			<fieldset class="mb-4">
+				<label>Lecturer Last Name</label>
+				<input type ="text" th:field = "*{lastName}" placeholder = "Lecturer Last Name" class="form-control col-4" required>
+				<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Input a last name.</p>
+			</fieldset>
+			
+			<fieldset class="mb-4">
+				<label>Lecturer Email</label>
+				<input type ="text" th:field = "*{email}" placeholder = "Lecturer Email" class="form-control col-4" required>
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+			</fieldset>
+			
+			<fieldset class="mb-4">
+				<input type ="hidden" th:field = "*{username}">
+			</fieldset>
+			
+			<fieldset class="mb-4">
+				<input type ="hidden" th:field = "*{password}">
+			</fieldset>
+			
+			<fieldset class="mb-4">
+				<input type ="hidden" th:field = "*{id}">
+			</fieldset>
+			
+			<!-- 
+				the submit button calls the method referred to by the form when clicked.
+				all the values in the text fields will be saved in the object after 
+			-->
+			<button type="submit" class="btn btn-info col-2">Save New Lecturer</button>
+		</form>
+	</div>
+</body>
+</html>
+
+
